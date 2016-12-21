@@ -283,19 +283,19 @@ func fnv32(key string) uint32 {
 // we'll end up with a value of type map[string]interface{}, In most cases this isn't
 // out value type, this is why we've decided to remove this functionality.
 
-// func (m *ConcurrentMap) UnmarshalJSON(b []byte) (err error) {
-// 	// Reverse process of Marshal.
+func (m *ConcurrentMap) UnmarshalJSON(b []byte) (err error) {
+	// Reverse process of Marshal.
 
-// 	tmp := make(map[string]interface{})
+	tmp := make(map[string]interface{})
 
-// 	// Unmarshal into a single map.
-// 	if err := json.Unmarshal(b, &tmp); err != nil {
-// 		return nil
-// 	}
+	// Unmarshal into a single map.
+	if err := json.Unmarshal(b, &tmp); err != nil {
+		return nil
+	}
 
-// 	// foreach key,value pair in temporary map insert into our concurrent map.
-// 	for key, val := range tmp {
-// 		m.Set(key, val)
-// 	}
-// 	return nil
-// }
+	// foreach key,value pair in temporary map insert into our concurrent map.
+	for key, val := range tmp {
+		m.Set(key, val)
+	}
+	return nil
+}
